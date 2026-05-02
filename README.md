@@ -2,7 +2,7 @@
 
 ![llmcouncil](header.jpg)
 
-The idea of this repo is that instead of asking a question to your favorite LLM provider (e.g. OpenAI GPT 5.1, Google Gemini 3.0 Pro, Anthropic Claude Sonnet 4.5, xAI Grok 4, eg.c), you can group them into your "LLM Council". This repo is a simple, local web app that essentially looks like ChatGPT except it uses OpenRouter to send your query to multiple LLMs, it then asks them to review and rank each other's work, and finally a Chairman LLM produces the final response.
+The idea of this repo is that instead of asking a question to your favorite LLM provider (e.g. OpenAI GPT 5.1, Google Gemini 3.1 Pro, Anthropic Claude Sonnet 4.5, xAI Grok 4, etc.), you can group them into your "LLM Council". This repo is a simple, local web app that looks like ChatGPT, but it sends requests through OpenRouter to multiple LLMs, asks them to review and rank each other's work, and finally has a Chairman LLM produce the final response.
 
 In a bit more detail, here is what happens when you submit a query:
 
@@ -42,20 +42,19 @@ OPENROUTER_API_KEY=sk-or-v1-...
 
 Get your API key at [openrouter.ai](https://openrouter.ai/). Make sure to purchase the credits you need, or sign up for automatic top up.
 
+This app is OpenRouter-backed. If you want "ChatGPT" in the council, use an OpenAI model slug on OpenRouter such as `openai/gpt-5.1-chat` or `openai/gpt-5.1`.
+
 ### 3. Configure Models (Optional)
 
-Edit `backend/config.py` to customize the council:
+Set model overrides in `.env` to customize the council:
 
-```python
-COUNCIL_MODELS = [
-    "openai/gpt-5.1",
-    "google/gemini-3-pro-preview",
-    "anthropic/claude-sonnet-4.5",
-    "x-ai/grok-4",
-]
-
-CHAIRMAN_MODEL = "google/gemini-3-pro-preview"
+```bash
+COUNCIL_MODELS=openai/gpt-5.1-chat,google/gemini-3.1-pro-preview,anthropic/claude-sonnet-4.5,x-ai/grok-4
+CHAIRMAN_MODEL=openai/gpt-5.1
+TITLE_MODEL=google/gemini-2.5-flash
 ```
+
+The built-in defaults match those values.
 
 ## Running the Application
 
